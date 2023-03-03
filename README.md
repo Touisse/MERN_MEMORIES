@@ -1,4 +1,4 @@
-# Project Name
+# Memories Application
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://travis-ci.com/username/project-name.svg?branch=master)](https://travis-ci.com/username/project-name)
