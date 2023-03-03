@@ -32,10 +32,6 @@ Please make sure that your code follows the project's coding conventions and tha
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 
-## Credits
-
-This project was created by [Yassine Touisse](https://github.com/Touisse/Full_Stack_MERN_MEMORIES.git). Special thanks to [Any contributors](https://github.com/username/project-name/graphs/contributors) who have contributed to this project.
-
 ## Contact
 
 If you have any questions or comments about the project, please feel free to contact me at [yassinetouisse99@gmail.com](mailto:yassinetouisse99@gmail.com).
