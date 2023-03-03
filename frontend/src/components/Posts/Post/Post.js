@@ -65,7 +65,7 @@ const Post = ({ post, setCurrentId }) => {
       </CardContent>
       <CardActions className={classes.cardActions}>
         <Button
-          style={{ color: "skyblue" }}
+          style={{ color: "rgba(0,183,255, 1)" }}
           size="small"
           color="primary"
           onClick={() => {
