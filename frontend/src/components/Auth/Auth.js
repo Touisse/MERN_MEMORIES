@@ -15,20 +15,42 @@ import { useDispatch } from "react-redux";
 import { AUTH } from "../../constants/actionTypes";
 import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import { signIn, signUp } from "../../actions/auth";
+
+const initialState = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
 
 const Auth = () => {
+  //States
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
+  const [formData, setFormData] = useState(initialState);
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleSubmit = () => {};
-  const handleChange = () => {};
+  //Functions
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isSignUp) {
+      dispatch(signUp(formData, navigate));
+    } else {
+      dispatch(signIn(formData, navigate));
+    }
+  };
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
   const switchMode = () => {
     setIsSignUp((prev) => !prev);
-    handleShowPassword(false);
+    setShowPassword(false);
   };
   const handleShowPassword = () => setShowPassword((prev) => !prev);
+  //Google Methods
   const googleSuccess = async (res) => {
     const decoded = jwt_decode(res.credential);
     const token = res.credential;
@@ -61,8 +83,8 @@ const Auth = () => {
                   half
                 />
                 <Input
-                  name="firstName"
-                  label="First Name"
+                  name="lastName"
+                  label="Last Name"
                   handleChange={handleChange}
                   autoFocus
                   half
