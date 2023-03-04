@@ -35,3 +35,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Contact
 
 If you have any questions or comments about the project, please feel free to contact me at [yassinetouisse99@gmail.com](mailto:yassinetouisse99@gmail.com).
+
+## Interfaces
