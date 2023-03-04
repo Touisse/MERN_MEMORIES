@@ -72,7 +72,7 @@ const Post = ({ post, setCurrentId }) => {
           title={post.title}
         />
         <div className={classes.overlay}>
-          <Typography variant="h6">{user.decoded.name}</Typography>
+          <Typography variant="h6">{user?.decoded?.name}</Typography>
           <Typography variant="body2">
             {moment(post.createdAt).fromNow()}
           </Typography>
