@@ -129,9 +129,10 @@ const Form = ({ currentId, setCurrentId }) => {
           Submit
         </Button>
         <Button
+         className={classes.buttonClear}
           variant="contained"
           color="secondary"
-          size="small"
+          size="large"
           onClick={clear}
           fullWidth
         >

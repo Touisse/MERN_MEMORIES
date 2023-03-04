@@ -23,3 +23,11 @@ export const deletePost = (id) => API.delete(`/posts/${id}`);
 // auth
 export const signIn = (formData) => API.post("/user/signin", formData);
 export const signUp = (formData) => API.post("/user/signup", formData);
+
+//search
+export const fetchPostsBySearch = (searchQuery) =>
+  API.get(
+    `/posts/search?searchQuery=${searchQuery.search || "none"}&tags=${
+      searchQuery.tags
+    }`
+  );

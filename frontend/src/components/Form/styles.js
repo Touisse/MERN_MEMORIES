@@ -23,4 +23,9 @@ export default makeStyles((theme) => ({
     color: 'white',
     backgroundColor: 'rgba(0,183,255, 1)'
   },
+  buttonClear: {
+    marginBottom: 10,
+    color: 'white',
+    
+  }
 }));

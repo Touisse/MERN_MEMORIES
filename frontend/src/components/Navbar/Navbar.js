@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { AppBar, Avatar, Button, Toolbar, Typography } from "@material-ui/core";
-import memories from "../../images/Facebook_and_Social_Media-09-512.webp";
+import memories from "../../images/memories-Text.png";
+import memories1 from "../../images/Facebook_and_Social_Media-09-512.webp";
 import useStyles from "./styles";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -33,23 +34,20 @@ const Navbar = () => {
 
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
-      <div className={classes.brandContainer}>
-        <Typography
-          className={classes.heading}
-          variant="h2"
-          align="center"
-          component={Link}
-          to="/"
-        >
-          Memories
-        </Typography>
+      <Link to="/" className={classes.brandContainer}>
         <img
           className={classes.image}
           src={memories}
           alt="memories"
           height="60"
         />
-      </div>
+        <img
+          className={classes.image}
+          src={memories1}
+          alt="memories"
+          height="60"
+        />
+      </Link>
       <Toolbar className={classes.toolbar}>
         {user?.decoded ? (
           <div className={classes.profile}>
