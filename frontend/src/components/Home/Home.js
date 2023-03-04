@@ -11,7 +11,7 @@ import {
 import Posts from "../Posts/Posts";
 import Form from "../Form/Form";
 import useStyles from "./styles";
-import { getPosts, getPostBySearch } from "../../actions/posts";
+import { getPostsBySearch } from "../../actions/posts";
 import { useDispatch } from "react-redux";
 import Paginate from "../Pagination";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -30,24 +30,14 @@ const Home = () => {
   const page = query.get("page") || 1;
   const searchQuery = query.get("searchQuery");
 
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [dispatch, currentId]);
-
   const handleKeyPress = (e) => {
     if (e.KeyCode === 13) {
       searchPost();
     }
   };
-  const handleAdd = (tag) => {
-    setTags([...tags, tag]);
-  };
-  const handleDelete = (tagToDelete) => {
-    setTags(tags.filter((tag) => tag !== tagToDelete));
-  };
   const searchPost = () => {
     if (search.trim() || tags) {
-      dispatch(getPostBySearch({ search, tags: tags.join(",") }));
+      dispatch(getPostsBySearch({ search, tags: tags.join(",") }));
       navigate(
         `/posts/search?searchQuery=${search || "none"}&tags=${tags.join(",")}`
       );
@@ -55,6 +45,10 @@ const Home = () => {
       navigate("/");
     }
   };
+  const handleAddChip = (tag) => setTags([...tags, tag]);
+
+  const handleDeleteChip = (chipToDelete) =>
+    setTags(tags.filter((tag) => tag !== chipToDelete));
   return (
     <Grow in>
       <Container maxWidth="xl">
@@ -88,8 +82,8 @@ const Home = () => {
               <ChipInput
                 style={{ margin: "10px 0" }}
                 value={tags}
-                onAdd={handleAdd}
-                onDelete={handleDelete}
+                onAdd={(chip) => handleAddChip(chip)}
+                onDelete={(chip) => handleDeleteChip(chip)}
                 label="Search Tags"
                 variant="outlined"
               />
@@ -102,9 +96,11 @@ const Home = () => {
               </Button>
             </AppBar>
             <Form currentId={currentId} setCurrentId={setCurrentId} />
-            <Paper elevation={6}>
-              <Paginate />
-            </Paper>
+            {!searchQuery && !tags.length && (
+              <Paper className={classes.pagination} elevation={6}>
+                <Paginate page={page} />
+              </Paper>
+            )}
           </Grid>
         </Grid>
       </Container>

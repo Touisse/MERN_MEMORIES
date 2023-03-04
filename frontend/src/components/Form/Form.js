@@ -5,45 +5,42 @@ import FileBase from "react-file-base64";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { createPost, updatePost } from "../../actions/posts";
+import { useNavigate } from "react-router-dom";
 
 const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({
     title: "",
     message: "",
-    tags: "",
+    tags: [],
     selectedFile: "",
   });
   const post = useSelector((state) =>
-    currentId ? state.posts.find((p) => p._id === currentId) : null
+    currentId
+      ? state.posts.posts.find((message) => message._id === currentId)
+      : null
   );
   const classes = useStyles();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("profile"));
 
   useEffect(() => {
-    if (post) {
-      setPostData(post);
-    }
+    if (!post?.title) clear();
+    if (post) setPostData(post);
   }, [post]);
+
   const clear = () => {
-    setCurrentId(null);
-    setPostData({
-      title: "",
-      message: "",
-      tags: "",
-      selectedFile: "",
-    });
+    setCurrentId(0);
+    setPostData({ title: "", message: "", tags: [], selectedFile: "" });
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!currentId) {
-      dispatch(createPost({ ...postData, name: user?.decoded?.name }));
+      dispatch(createPost({ ...postData, name: user?.result?.name }, navigate));
       clear();
     } else {
-      dispatch(
-        updatePost(currentId, { ...postData, name: user?.decoded?.name })
-      );
+      dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
       clear();
     }
   };
@@ -51,7 +48,6 @@ const Form = ({ currentId, setCurrentId }) => {
     return (
       <Paper className={classes.paper}>
         <Typography variant="h6" align="center">
-          {" "}
           Please Sign in to create your Own memories and like other's Memories{" "}
         </Typography>
       </Paper>
@@ -69,16 +65,7 @@ const Form = ({ currentId, setCurrentId }) => {
         <Typography variant="h6">
           {!post ? "Creating a Memory" : "Updating a Memory"}
         </Typography>
-        {/* <TextField
-          name="creator"
-          variant="outlined"
-          label="Creator"
-          fullWidth
-          value={postData.creator}
-          onChange={(e) =>
-            setPostData({ ...postData, creator: e.target.value })
-          }
-        /> */}
+
         <TextField
           name="title"
           variant="outlined"
@@ -129,7 +116,7 @@ const Form = ({ currentId, setCurrentId }) => {
           Submit
         </Button>
         <Button
-         className={classes.buttonClear}
+          className={classes.buttonClear}
           variant="contained"
           color="secondary"
           size="large"
