@@ -29,7 +29,7 @@ const Post = ({ post, setCurrentId }) => {
         (like) => like === (user?.decoded?.sub || user?.decoded?._id)
       ) ? (
         <>
-          <ThumbUpAltIcon fontSize="small" />
+          <ThumbUpAltIcon fontSize="small"  />
           &nbsp;
           {post.likes.length > 2
             ? `You and ${post.likes.length - 1} others`
@@ -37,7 +37,7 @@ const Post = ({ post, setCurrentId }) => {
         </>
       ) : (
         <>
-          <ThumbUpAltOutlined fontSize="small" />
+          <ThumbUpAltOutlined fontSize="small"   />
           &nbsp;{post.likes.length} {post.likes.length === 1 ? "Like" : "Likes"}
         </>
       );
@@ -117,6 +117,7 @@ const Post = ({ post, setCurrentId }) => {
           color="primary"
           disabled={!user?.decoded}
           onClick={() => dispatch(likePost(post._id))}
+          style={{ color:'rgba(0,183,255, 1)'}}
         >
           <Likes />
         </Button>
